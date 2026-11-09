@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JA11 Control</title>
+
+<style>
+
+:root{color-scheme:dark;--bg:#0b0e12;--panel:#12171d;--panel2:#171d24;--line:#28313b;--text:#f1f4f5;--muted:#89939e;--lime:#ff526b;--blue:#8faaff;--red:#ff526b;--shadow:0 20px 60px #0005}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 65% -25%,#293432 0,transparent 43%),var(--bg);color:var(--text);font:13px 'Space Mono',sans-serif;min-height:100vh}.app{max-width:1440px;margin:auto;padding:24px 34px 36px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:27px}.brand{display:flex;align-items:center;gap:11px;font:800 16px 'Space Mono';letter-spacing:.2px}.mark{width:35px;height:35px;border-radius:11px;background:var(--lime);color:#18200b;display:grid;place-items:center;font-size:18px}.brand small{display:block;color:#7d8894;font:600 9px 'Space Mono';letter-spacing:1.7px;margin-top:3px}.topright{display:flex;align-items:center;gap:12px}.status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:11px;margin-right:5px}.dot{width:7px;height:7px;border-radius:50%;background:#5a6470}.dot.on{background:var(--lime);box-shadow:0 0 12px #ff526baa}.button{border:1px solid var(--line);background:#1b222b;color:#e4e9ec;border-radius:9px;padding:9px 13px;font:600 10px 'Space Mono';cursor:pointer;transition:.16s}.button:hover{border-color:#65737f;background:#202a34}.button.primary{background:var(--lime);border-color:var(--lime);color:#17200b}.button.primary:hover{background:#e0ff96}.button.ghost{background:transparent;color:#adb7c1}.button:disabled{opacity:.45;cursor:not-allowed}.headline{display:flex;align-items:end;justify-content:space-between;margin-bottom:16px}.eyebrow{color:var(--lime);font:700 9px 'Space Mono';letter-spacing:2px}.headline h1{font:700 26px 'Space Mono';letter-spacing:-.8px;margin:6px 0 4px}.headline p{margin:0;color:var(--muted);font-size:11px}.device{display:flex;align-items:center;gap:12px;padding:12px 15px;background:linear-gradient(105deg,#171e24,#12171c);border:1px solid var(--line);border-radius:13px;margin-bottom:15px}.deviceicon{width:37px;height:37px;border-radius:10px;background:#ff526b17;color:var(--lime);display:grid;place-items:center;font-size:18px}.devicename{font:700 12px 'Space Mono'}.devicesub{font-size:10px;color:var(--muted);margin-top:4px}.deviceinfo{margin-left:auto;display:flex;align-items:center;gap:7px}.chip{border:1px solid #313b45;color:#a8b2bc;padding:6px 8px;border-radius:7px;font-size:9px}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 265px;gap:15px;align-items:start}.panel{background:#12171df2;border:1px solid var(--line);border-radius:15px;padding:17px;box-shadow:var(--shadow)}.eqhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.eqtitle{display:flex;align-items:center;gap:9px}.eqicon{width:28px;height:28px;background:#ff526b14;border-radius:8px;color:var(--lime);display:grid;place-items:center}.eqtitle h2,.sidehead h2{font:700 12px 'Space Mono';margin:0}.eqtitle p,.sidehead p{font-size:9px;color:var(--muted);margin:4px 0 0}.eqactions{display:flex;gap:6px}.plotbox{height:280px;border:1px solid #29323b;border-radius:10px;background:linear-gradient(180deg,#10151b,#0f1318);overflow:hidden;position:relative}.plotbox svg{width:100%;height:100%;display:block}.gridline{stroke:#333b43;stroke-width:1}.gridline.major{stroke:#4a535b}.axistext{fill:#858f99;font:10px 'Space Mono'}.zero{stroke:#77818a;stroke-width:1.2}.curve-fill{fill:#ff526b;opacity:.09}.curve{fill:none;stroke:var(--red);stroke-width:3;stroke-linejoin:round;stroke-linecap:round}.stem{stroke:#68727c;stroke-width:1}.handle{stroke:#161a1e;stroke-width:2;cursor:grab}.handle:active{cursor:grabbing}.handletext{fill:#f5f5f5;font:bold 10px 'Space Mono';text-anchor:middle;pointer-events:none}.plothelp{position:absolute;right:12px;top:10px;color:#78828d;font-size:9px;pointer-events:none}.controls{display:grid;grid-template-columns:86px repeat(5,minmax(95px,1fr));gap:8px;margin-top:13px}.global{grid-row:span 2;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:5px 8px 4px 0}.glabel{font-size:9px;font-weight:700;color:#b8c1c9;text-align:center;line-height:1.35}.gvalue{font:700 11px 'Space Mono';color:var(--lime);margin:6px 0}.vertical{writing-mode:vertical-lr;direction:rtl;appearance:slider-vertical;width:20px;height:123px;accent-color:var(--red);cursor:pointer}.gnum{width:54px;margin-top:6px}.band{background:#171d24;border:1px solid #2b343e;border-radius:10px;padding:9px 8px 8px;min-width:0}.bandtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}.bandnum{width:23px;height:21px;display:grid;place-items:center;border:1px solid #3a444e;border-radius:6px;font:700 10px 'Space Mono'}.band.selected .bandnum{border-color:var(--red);background:#ff526b18;color:var(--red)}.filterbuttons{display:flex;gap:3px}.filterbuttons button{background:#3a4148;border:0;border-radius:4px;color:#d4d9dd;font-size:8px;font-weight:700;padding:4px 6px;cursor:pointer}.filterbuttons button.active{background:var(--red);color:white}.gainbox{display:flex;align-items:center;gap:5px;margin-bottom:8px}.gainrange{writing-mode:vertical-lr;direction:rtl;appearance:slider-vertical;width:20px;height:76px;accent-color:var(--red);margin:auto;cursor:pointer}.gainvalue{font-size:9px;color:var(--muted);min-width:34px;text-align:right}.fields{display:grid;gap:5px}.field{display:grid;grid-template-columns:22px 1fr;align-items:center;gap:4px}.field label{color:#808b96;font-size:8px}.field input{width:100%;min-width:0;background:#0e1217;border:1px solid #333d47;border-radius:5px;color:#eef1f4;padding:6px 5px;font:10px 'Space Mono';text-align:center}.bandstatus{font-size:8px;color:#65717d;text-align:center;margin-top:6px}.side{display:grid;gap:12px}.sidepanel{background:#12171df2;border:1px solid var(--line);border-radius:14px;padding:15px}.sidehead{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}.presetlist{display:grid;gap:6px}.presetbtn{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;background:#171d24;border:1px solid #2c3540;border-radius:8px;color:#b5bec8;padding:9px 10px;font-size:10px;cursor:pointer}.presetbtn:hover{border-color:#56616d}.presetbtn.active{color:var(--lime);border-color:#ff526b70;background:#ff526b10}.presetbtn small{color:#717d88;font-size:8px}.rule{height:1px;background:#28313b;margin:12px 0}.setting{display:flex;align-items:center;gap:9px;padding:9px 0;border-top:1px solid #28313b}.setting:first-of-type{border-top:0}.seticon{width:27px;height:27px;border-radius:7px;border:1px solid #313a44;color:#acb6c0;display:grid;place-items:center;font-size:11px}.setcopy{flex:1}.setcopy strong{display:block;font-size:9px}.setcopy small{display:block;font-size:8px;color:var(--muted);margin-top:3px}.toggle{width:31px;height:18px;border:0;border-radius:99px;background:#38414b;padding:2px;cursor:pointer}.toggle i{display:block;width:14px;height:14px;background:#b6c0c9;border-radius:50%;transition:.15s}.toggle.on{background:var(--lime)}.toggle.on i{transform:translateX(13px);background:#1b220d}.select{background:#1a2027;color:#e0e5e9;border:1px solid #333c45;border-radius:6px;padding:6px 7px;font:9px 'Space Mono'}.info{font-size:8px;line-height:1.5;color:#9aa4ae;background:#171d24;padding:9px;border-radius:8px}.actions{display:flex;justify-content:space-between;align-items:center;margin-top:12px;border-top:1px solid #29313a;padding-top:12px}.leftactions,.rightactions{display:flex;gap:6px;align-items:center}.hint{color:#77828d;font-size:9px}.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,12px);opacity:0;transition:.18s;background:#222b34;border:1px solid #414c57;padding:10px 14px;border-radius:9px;font-size:11px;box-shadow:var(--shadow);pointer-events:none;z-index:5}.toast.show{opacity:1;transform:translate(-50%,0)}.modalshade{position:fixed;inset:0;background:#0009;display:none;place-items:center;z-index:4}.modalshade.show{display:grid}.modal{width:min(420px,90vw);background:#171d24;border:1px solid #37424d;border-radius:14px;padding:18px}.modal h3{font:700 14px 'Space Mono';margin:0 0 12px}.modal input{width:100%;background:#0e1217;border:1px solid #333d47;border-radius:7px;padding:9px;color:var(--text)}.modalfoot{display:flex;justify-content:flex-end;gap:7px;margin-top:13px}@media(max-width:1120px){.workspace{grid-template-columns:1fr}.side{grid-template-columns:repeat(2,minmax(0,1fr))}.sidepanel:last-child{grid-column:1/-1}}@media(max-width:760px){.app{padding:16px}.controls{grid-template-columns:70px repeat(2,minmax(100px,1fr))}.global{grid-row:span 3}.plotbox{height:220px}.side{grid-template-columns:1fr}.sidepanel:last-child{grid-column:auto}.deviceinfo{display:none}.headline{align-items:start;gap:9px;flex-direction:column}}@media(max-width:440px){.controls{grid-template-columns:62px repeat(2,minmax(87px,1fr));gap:5px}.band{padding:7px 5px}.rightactions .button{padding:8px}.brand small{display:none}}
+</style><style>.eqnav{display:flex;gap:5px;padding:0 0 12px;border-bottom:1px solid var(--line);margin:-3px 0 14px}.eqnav button{border:0;background:transparent;color:#85909b;border-radius:7px;padding:8px 13px;font:600 10px 'Space Mono';cursor:pointer}.eqnav button:hover{background:#1b222b;color:#dfe4e8}.eqnav button.active{background:#ff526b17;color:var(--lime)}.subpage{background:#12171df2;border:1px solid var(--line);border-radius:15px;padding:20px;min-height:490px;box-shadow:var(--shadow)}.subhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.subhead h2{font:700 16px 'Space Mono';margin:0}.subhead p{font-size:10px;color:var(--muted);margin:5px 0 0}.subtools{display:flex;gap:8px;align-items:center}.search{background:#0e1217;border:1px solid #333d47;border-radius:8px;padding:9px 11px;color:var(--text);font:10px 'Space Mono';min-width:220px}.subcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}.subcard{padding:14px;background:#171d24;border:1px solid #2b343e;border-radius:11px}.subcard h3{font:700 11px 'Space Mono';margin:0 0 6px}.subcard p{font-size:9px;line-height:1.5;color:#8e99a4;min-height:32px}.subcard .button{margin-top:7px}.subnotice{margin-top:14px;background:#171d24;color:#9ca7b1;padding:12px;border-radius:9px;font-size:9px;line-height:1.6}.subtabs{display:flex;gap:7px;margin:12px 0}.subtabs button{border:1px solid #333d47;background:#171d24;color:#9da8b2;border-radius:7px;padding:8px 11px;font-size:9px;cursor:pointer}.subtabs button.active{color:var(--lime);border-color:#ff526b66;background:#ff526b10}@media(max-width:650px){.eqnav{overflow:auto}.eqnav button{white-space:nowrap;padding:8px 9px}.subhead{align-items:flex-start;gap:10px;flex-direction:column}.search{min-width:0;width:100%}}</style><style>.workspace[hidden],.subpage[hidden]{display:none!important}</style><style>
+.gain-scale { position:relative; display:flex; align-items:center; justify-content:center; gap:3px; }
+.gain-scale input[type=range] { margin:0; appearance:auto; writing-mode:vertical-lr; direction:rtl; }
+.gain-ticks { display:flex; flex-direction:column; justify-content:space-between; align-self:stretch; padding-block:7px; width:26px; color:#99a5b0; font:9px/1 'Space Mono',sans-serif; font-variant-numeric:tabular-nums; pointer-events:none; }
+.gain-ticks span { display:flex; align-items:center; gap:3px; height:0; }
+.gain-ticks span::before { content:''; width:5px; border-top:1px solid #55616b; }
+.gain-ticks span:nth-child(3) { color:var(--text); }
+.gainbox { flex-direction:column; gap:4px; }
+.gainvalue { width:100%; text-align:center; font-variant-numeric:tabular-nums; }
+.global-entry { display:flex; width:100%; max-width:74px; margin-top:9px; padding:5px 4px; align-items:center; background:#0e1217; border:1px solid #3a454e; border-radius:7px; }
+.global-entry:focus-within { border-color:var(--lime); }
+.global-entry input { flex:1; min-width:0; padding:2px 0; background:none; border:0; outline:0; color:var(--text); font:600 11px 'Space Mono',sans-serif; text-align:center; }
+.global-entry span { font-size:9px; color:var(--muted); }
+.controls input[type=number] { appearance:textfield; font-variant-numeric:tabular-nums; text-align:center; }
+.controls input[type=number]::-webkit-inner-spin-button,
+.controls input[type=number]::-webkit-outer-spin-button { appearance:none; margin:0; }
+.account-button { display:inline-flex; align-items:center; gap:7px; max-width:180px; }
+.account-button svg { fill:none; stroke:currentColor; stroke-width:1.5; flex:none; }
+.account-button span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.account-button.signed-in { color:var(--lime); }
+.account-library-bar { grid-column:1 / -1; display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
+.account-library-bar small { flex:1; color:var(--muted); }
+</style><link rel="stylesheet" href="studio-theme.css"><script src="studio-language.js" defer></script></head><body><main class="app">
+<header class="top"><div class="brand"><div class="mark" aria-label="FiiO"><svg viewBox="60 185 326 76" aria-hidden="true"><path fill="currentColor" d="M65 206 77 194H155L161 200V206ZM65 219H143V232H95V254H76L65 244ZM178 202 186 194H208V244L196 254H178ZM226 202 234 194H256V244L244 254H226ZM274 204 285 194H371L382 205V243L371 254H311V241H352V206H304V254H285L274 243Z"/></svg></div><div>JA11 CONTROL<small>JA11 DAC CONTROL</small></div></div><div class="topright"><div class="status"><i class="dot" id="statusDot"></i><span id="status">Chưa kết nối</span></div><button class="button primary" id="connect">Kết nối JA11&nbsp; ↗</button><button class="button account-button" id="fiioAccount" type="button" title="Tài khoản FiiO"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="10" cy="6.5" r="3"/><path d="M3.5 17c.4-3.6 2.7-5.2 6.5-5.2s6.1 1.6 6.5 5.2"/></svg><span>Đăng nhập FiiO</span></button><button class="button tool-button" id="toggleTheme" aria-label="Chuyển giao diện sáng tối"></button><button class="button tool-button" id="settings" title="Cài đặt" aria-label="Cài đặt"><svg viewBox="0 0 24 24" aria-hidden="true"><g transform="translate(1 .5)"><path d="m9 3-.6 2.2-2 .9-2-.7-2 3.4 1.5 1.6v2.3L2.4 14l2 3.5 2-.6 2 .9L9 20h4l.6-2.2 2-.9 2 .6 2-3.5-1.5-1.3v-2.3l1.5-1.6-2-3.4-2 .7-2-.9L13 3Z"/><circle cx="11" cy="11.5" r="3"/></g></svg></button><div class="window-actions"><button id="windowMinimize" title="Thu nhỏ" aria-label="Thu nhỏ">−</button><button id="windowMaximize" title="Phóng to / khôi phục" aria-label="Phóng to / khôi phục">□</button><button id="windowClose" title="Đóng" aria-label="Đóng">×</button></div></div></header>
+<dialog id="preferences"><div class="settings-head"><h2>Cấu hình ứng dụng</h2><button class="button" id="closeSettings" aria-label="Đóng cài đặt">×</button></div>
+<div class="pref-row"><label for="language">Ngôn ngữ</label><select id="language" hidden><option value="vi">Tiếng Việt</option><option value="en">English</option></select><div class="language-menu"><button class="button" id="languageButton">Tiếng Việt ▾</button><div id="languageOptions" hidden><button data-lang="vi">Tiếng Việt</button><button data-lang="en">English</button></div></div></div>
+
+<div class="palette-tabs"><span class="palette-label">Màu giao diện</span></div>
+<div class="palette-body"><div class="palette-wheel-frame"><canvas id="colorWheel" width="180" height="180" aria-label="Vòng chọn màu"></canvas></div><div><input id="exactColor" type="color" aria-label="Màu tùy chỉnh"><input id="hexColor" maxlength="7" aria-label="Mã màu HEX"><input id="colorValue" type="hidden" value="100"></div></div>
+<fieldset><legend>Ảnh nền</legend><div class="wallpaper-preview" id="wallpaperPreview"></div><button class="button" id="chooseWallpaper">Chọn ảnh</button> <button class="button" id="clearWallpaper">Xóa ảnh</button><button class="button ghost" id="resetWallpaper">Đặt lại thông số ảnh</button><input type="file" id="wallpaperFile" accept="image/png,image/jpeg,image/webp" hidden>
+<label class="pref-range">Độ tối<input type="range" id="wallDim" min="0" max="100"><output></output></label>
+<label class="pref-range">Độ mờ<input type="range" id="wallBlur" min="0" max="30"><output></output></label>
+<label class="pref-range">Ngang<input type="range" id="wallX" min="0" max="100"><output></output></label><label class="pref-range">Dọc<input type="range" id="wallY" min="0" max="100"><output></output></label><label class="pref-range">Phóng to<input type="range" id="wallZoom" min="100" max="200"><output></output></label></fieldset>
+<input id="developerName" hidden value="Nbao">
+<button class="button ghost" id="resetAppearance">Khôi phục giao diện mặc định</button><p id="settingsStatus" role="status" hidden></p></dialog>
+<div id="scrollContent"><section class="headline"><div><div class="eyebrow">FIIO · JADE AUDIO</div><h1>Tinh chỉnh chất âm của bạn.</h1></div><span id="fw" hidden></span></section>
+<nav class="eqnav" aria-label="JA11 Control sections"><button class="active" data-view="home">Home</button><button data-view="personal">Personal</button><button data-view="handpick">Handpick</button><button data-view="about">About</button></nav>
+<div class="workspace"><section class="panel"><div class="eqhead"><div class="eqtitle"><div><h2>Parametric Equalizer</h2></div></div><div class="eqactions"><button class="button ghost" id="read">Đọc lại DAC</button><button class="button ghost" id="export">Xuất EQ</button><button class="button ghost" id="importBtn">Nhập EQ</button><input id="file" type="file" accept="application/json" hidden></div></div>
+<div class="plotbox" id="plotbox"><svg id="plot" viewBox="0 0 900 360" preserveAspectRatio="none"><g id="grid"></g><path id="area" class="curve-fill"/><path id="curve" class="curve"/><g id="handles"></g></svg><div class="plothelp">Kéo điểm để chỉnh tần số và gain</div></div>
+<div class="controls"><div class="global"><div class="glabel">GLOBAL<br>GAIN</div><div class="gvalue" id="globalValue">0.0 dB</div><div class="gain-scale"><input id="global" class="vertical" type="range" min="-12" max="12" step="0.1" value="0" aria-label="Global gain"><div class="gain-ticks" aria-hidden="true"><span>+12</span><span>+6</span><span>0</span><span>−6</span><span>−12</span></div></div><div class="global-number-row"><label class="global-entry"><input id="globalNum" aria-label="Global gain, dB" type="number" min="-12" max="12" step="0.1" value="0"></label><span class="global-unit">dB</span></div></div>
+<div id="bands" style="display:contents"></div></div>
+<div class="actions"><div class="leftactions"><button class="button ghost" id="flat">Làm phẳng</button><button class="button ghost" id="undo">Hoàn tác</button><span class="hint" id="dirty" hidden>Bản nháp trên máy · chưa đồng bộ</span></div><div class="rightactions"><button class="button" id="apply" hidden>Nghe thử</button><button class="button primary" id="save">Lưu vào JA11</button></div></div></section>
+<aside class="side"><section class="sidepanel"><div class="sidehead"><div><h2>Preset EQ</h2><p>Chọn chất âm có sẵn trên JA11</p></div><span class="eqicon">♫</span></div><div class="presetlist"><button class="presetbtn" data-preset="Vocal">Vocal</button><button class="presetbtn" data-preset="Classic">Classic</button><button class="presetbtn" data-preset="Bass">Bass</button><button class="presetbtn active" data-preset="User 1">Custom</button><button class="presetbtn" data-preset="Off">Tắt EQ</button></div><div class="rule"></div><button class="button" id="saveLocal" style="width:100%">Lưu preset trên máy ＋</button><button class="button" id="saveFiio" style="width:100%;margin-top:7px">Lưu EQ lên FiiO ＋</button><div class="presetlist" id="localPresets" style="margin-top:7px"></div></section>
+<section class="sidepanel"><div class="sidehead"><div><h2>Cài đặt thiết bị</h2><p>Tùy chọn JA11</p></div><span class="eqicon">⚙</span></div><div class="setting"><div class="seticon">♬</div><div class="setcopy"><strong>Mic in line</strong><small>Bật mic trên tai nghe</small></div><button class="toggle" id="mic"><i></i></button></div><div class="setting"><div class="seticon">⇄</div><div class="setcopy"><strong>USB Audio</strong><small>Chế độ tương thích thiết bị</small></div><select class="select" id="uac" hidden><option value="2.0">2.0</option><option value="1.0">1.0</option></select><div class="uac-picker"><button class="button" id="uacButton" type="button" aria-haspopup="true" aria-expanded="false" disabled>— ▾</button><div id="uacOptions" hidden><button type="button" data-uac="1.0">USB Audio 1.0</button><button type="button" data-uac="2.0">USB Audio 2.0</button></div></div></div><div class="info">Đổi USB Audio có thể làm JA11 ngắt kết nối rồi xuất hiện lại. Kết nối lại nếu cần.</div></section>
+</aside></div>
+<div hidden><span id="deviceSub"></span><span id="uacChip"></span><span id="rateChip"></span><span id="presetChip"></span></div><section id="subpage" class="subpage" hidden></section><footer style="display:flex;justify-content:space-between;color:#606b76;font-size:9px;margin-top:14px"><span>JA11 Control · PEQ editor</span></footer></div></main><div class="toast" id="toast"></div><div class="modalshade" id="modal"><div class="modal"><h3>Lưu preset cục bộ</h3><input id="presetName" placeholder="Tên preset"><div class="modalfoot"><button class="button ghost" id="cancelModal">Hủy</button><button class="button primary" id="confirmModal">Lưu preset</button></div></div></div>
+<script>
+const $=s=>document.querySelector(s), limits={freq:[20,20000],gain:[-12,12],q:[.1,10]}, colors=['#ff526b','#df9b45','#9dc35a','#50b8c4','#9b8ef3'];let model={masterGain:0,bands:[80,250,1000,3000,10000].map(freq=>({type:'PK',freq,gain:0,q:1}))},savedUser1=null,active='User 1',deviceState={},history=[],dragIndex=-1;
+const send=(action,value)=>{if(window.chrome?.webview)chrome.webview.postMessage({action,value});else toast('Mở JA11 Control để kết nối DAC')};function persistLocalPresets(json){localStorage.setItem('ja11-local-presets',json);if(window.chrome?.webview)send('local-presets-save',JSON.parse(json))}function toast(text){const el=$('#toast');el.textContent=text;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2300)}
+function xFreq(f){return 100+(Math.log10(Math.max(20,Math.min(20000,f))/20)/3)*770}function yDb(g){return 30+(12-Math.max(-12,Math.min(12,g)))*12.5}
+function drawGrid(){const g=$('#grid');g.replaceChildren();[20,50,100,200,500,1000,2000,5000,10000,20000].forEach(f=>{let x=xFreq(f),l=document.createElementNS('http://www.w3.org/2000/svg','line');l.setAttribute('x1',x);l.setAttribute('x2',x);l.setAttribute('y1',25);l.setAttribute('y2',330);l.setAttribute('class','gridline '+([20,100,1000,10000,20000].includes(f)?'major':''));g.append(l);let t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',x);t.setAttribute('y',350);t.setAttribute('text-anchor',f===20?'start':f===20000?'end':'middle');t.setAttribute('class','axistext');t.textContent=f>=1000?`${f/1000} kHz`:`${f} Hz`;g.append(t)});[-12,-6,0,6,12].forEach(v=>{let y=yDb(v),l=document.createElementNS('http://www.w3.org/2000/svg','line');l.setAttribute('x1',75);l.setAttribute('x2',870);l.setAttribute('y1',y);l.setAttribute('y2',y);l.setAttribute('class',v===0?'zero':'gridline major');g.append(l);let t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',65);t.setAttribute('y',y+4);t.setAttribute('text-anchor','end');t.setAttribute('class','axistext');t.textContent=`${v>0?'+':''}${v} dB`;g.append(t)})}
+function mag(b,f){const sr=48000,w0=2*Math.PI*b.freq/sr,A=10**(b.gain/40),cs=Math.cos(w0),sn=Math.sin(w0),alpha=sn/(2*b.q),beta=2*Math.sqrt(A)*alpha;let a;if(b.type==='PK')a=[1+alpha*A,-2*cs,1-alpha*A,1+alpha/A,-2*cs,1-alpha/A];else if(b.type==='LSC')a=[A*((A+1)-(A-1)*cs+beta),2*A*((A-1)-(A+1)*cs),A*((A+1)-(A-1)*cs-beta),(A+1)+(A-1)*cs+beta,-2*((A-1)+(A+1)*cs),(A+1)+(A-1)*cs-beta];else a=[A*((A+1)+(A-1)*cs+beta),-2*A*((A-1)+(A+1)*cs),A*((A+1)+(A-1)*cs-beta),(A+1)-(A-1)*cs+beta,2*((A-1)-(A+1)*cs),(A+1)-(A-1)*cs-beta];let w=2*Math.PI*f/sr,nr=a[0]+a[1]*Math.cos(w)+a[2]*Math.cos(2*w),ni=-a[1]*Math.sin(w)-a[2]*Math.sin(2*w),dr=a[3]+a[4]*Math.cos(w)+a[5]*Math.cos(2*w),di=-a[4]*Math.sin(w)-a[5]*Math.sin(2*w);return 10*Math.log10(Math.max(1e-12,(nr*nr+ni*ni)/(dr*dr+di*di)))}
+function response(f){return model.masterGain+model.bands.reduce((s,b)=>s+mag(b,f),0)}function draw(){const points=[];for(let i=0;i<=260;i++){let f=20*10**(3*i/260),x=100+770*i/260,y=yDb(response(f));points.push([x,y])}const d=points.map(([x,y],i)=>`${i?'L':'M'}${x.toFixed(2)},${y.toFixed(2)}`).join(' ');$('#curve').setAttribute('d',d);$('#area').setAttribute('d',`${d} L870 330 L100 330 Z`);const handles=$('#handles');handles.replaceChildren();model.bands.forEach((b,i)=>{const x=xFreq(b.freq),y=yDb(response(b.freq));const ns='http://www.w3.org/2000/svg';let stem=document.createElementNS(ns,'line');stem.setAttribute('x1',x);stem.setAttribute('x2',x);stem.setAttribute('y1',y);stem.setAttribute('y2',yDb(0));stem.setAttribute('class','stem');handles.append(stem);let c=document.createElementNS(ns,'circle');c.setAttribute('cx',0);c.setAttribute('cy',0);c.setAttribute('r',10);c.dataset.x=x;c.dataset.y=y;c.setAttribute('fill',colors[i]);c.setAttribute('class','handle');c.dataset.index=i;c.setAttribute('tabindex','0');handles.append(c);let t=document.createElementNS(ns,'text');t.setAttribute('x',0);t.setAttribute('y',3.5);t.dataset.x=x;t.dataset.y=y;t.setAttribute('class','handletext');t.textContent=i+1;handles.append(t)});sizePlotHandles();syncEqEditability();$('#global').value=model.masterGain;if(document.activeElement !== $('#globalNum')) $('#globalNum').value=model.masterGain.toFixed(1);$('#globalValue').textContent=`${model.masterGain>0?'+':''}${model.masterGain.toFixed(1)} dB`;renderBands()}
+function createBandRow(i, b) {
+    const el = document.createElement('article');
+    el.className = 'band';
+    el.dataset.i = i;
+    el.innerHTML = `<div class="bandtop"><span class="bandnum">${i+1}</span><div class="filterbuttons"><button data-type="PK" title="Peaking">P</button><button data-type="LSC" title="Low shelf">LS</button><button data-type="HSC" title="High shelf">HS</button></div></div><div class="gainbox"><div class="gain-scale"><input class="gainrange" type="range" min="-12" max="12" step="0.1" value="${b.gain}" aria-label="Band ${i+1} gain"><div class="gain-ticks" aria-hidden="true"><span>+12</span><span>+6</span><span>0</span><span>−6</span><span>−12</span></div></div><span class="gainvalue">${b.gain>0?'+':''}${Number(b.gain).toFixed(1)} dB</span></div><div class="fields"><div class="field"><label>Gain</label><input data-key="gain" type="number" min="-12" max="12" step="0.1" value="${b.gain}"></div><div class="field"><label>Freq</label><input data-key="freq" type="number" min="20" max="20000" step="1" value="${b.freq}"></div><div class="field"><label>Q</label><input data-key="q" type="number" min="0.1" max="10" step="0.01" value="${b.q}"></div></div><div class="bandstatus">${b.freq>=1000?(b.freq/1000).toFixed(b.freq%1000?1:0)+' kHz':b.freq+' Hz'}</div>`;
+    el.querySelectorAll('[data-type]').forEach(button => button.onclick = () => {
+        checkpoint();
+        model.bands[i].type = button.dataset.type;
+        draw();
+    });
+    el.querySelector('.gainrange').oninput = event => {
+        model.bands[i].gain = event.target.valueAsNumber;
+        draw();
+    };
+    el.querySelectorAll('[data-key]').forEach(input => {
+        const key = input.dataset.key;
+        input.oninput = () => {
+            if (!Number.isFinite(input.valueAsNumber)) return;
+            const [min, max] = limits[key];
+            model.bands[i][key] = Math.min(max, Math.max(min, input.valueAsNumber));
+            draw();
+        };
+        input.onblur = () => { input.value = model.bands[i][key]; };
+    });
+    return el;
+}
+function renderBands() {
+    const root = $('#bands');
+    model.bands.forEach((b,i) => {
+        if (!root.children[i]) root.append(createBandRow(i,b));
+        const el = root.children[i];
+        el.querySelector('.gainrange').value = b.gain;
+        el.querySelector('.gainvalue').textContent = (b.gain > 0 ? '+' : '') + b.gain.toFixed(1) + ' dB';
+        el.querySelector('.bandstatus').textContent = b.freq >= 1000 ? (b.freq / 1000) + ' kHz' : b.freq + ' Hz';
+        el.querySelectorAll('[data-type]').forEach(button => button.classList.toggle('active', button.dataset.type === b.type));
+        el.querySelectorAll('[data-key]').forEach(input => {
+            if (document.activeElement !== input) input.value = b[input.dataset.key];
+        });
+    });
+}
+function checkpoint(){history.push(JSON.stringify(model));if(history.length>30)history.shift()}function loadSnapshot(snapshot){if(!Array.isArray(snapshot.bands)||snapshot.bands.length!==5)throw Error('Cấu hình phải có đủ 5 band');model={masterGain:+snapshot.masterGain||0,bands:snapshot.bands.map(b=>({type:['PK','LSC','HSC'].includes(b.type)?b.type:'PK',freq:+b.freq,gain:+b.gain,q:+b.q}))};draw()}
+let reading = false;
+function setDeviceControls(enabled) {
+    document.querySelectorAll('[data-preset], #apply, #save, #mic, #uac').forEach(control => control.disabled = !enabled);
+    syncEqEditability();
+}
+function resetDeviceDisplay() {
+    savedUser1 = null;
+    deviceState = {};
+    setActive('');
+    $('#statusDot').classList.remove('on');
+    $('#presetChip').textContent = 'Preset —';
+    $('#fw').textContent = 'Firmware —';
+    $('#uacChip').textContent = 'USB Audio —';
+    $('#rateChip').textContent = 'Sample rate —';
+    $('#mic').classList.remove('on');
+    $('#uac').selectedIndex = -1;
+    window.syncUacMenu?.();
+    setDeviceControls(false);
+}
+function connect() {
+    if (reading) return;
+    if (!window.chrome?.webview) return toast('Mở JA11 Control để kết nối DAC');
+    reading = true;
+    resetDeviceDisplay();
+    $('#connect').disabled = $('#read').disabled = true;
+    $('#status').textContent = 'Đang đọc JA11…';
+    $('#deviceSub').textContent = 'Đang đọc preset, global gain và 5 band từ DAC…';
+    $('#dirty').textContent = 'Đang chờ dữ liệu từ DAC';
+    $('.workspace').inert = true;
+    send('connect');
+}
+$('#connect').onclick = $('#read').onclick = connect;
+window.onHostMessage = m => {
+    if (m.action === 'local-presets-loaded') {
+        localStorage.setItem('ja11-local-presets',JSON.stringify(m.presets));
+        window.renderLocal?.();
+        if (!$('#subpage').hidden && $('#subpage [data-mode="mine"].active')) showPersonal(true);
+        return;
+    }
+    if (m.action === 'local-presets-saved') {
+        localStorage.setItem('ja11-local-presets',JSON.stringify(m.presets));
+        window.renderLocal?.();
+        if (!$('#subpage').hidden && $('#subpage [data-mode="mine"].active')) showPersonal(true);
+        return;
+    }
+    if (m.action === 'local-presets-load' || m.action === 'local-presets-save') { if(m.message) toast(m.message); return; }
+    if (m.action === 'dac-recovery') { $('#status').textContent = m.message; $('#dirty').textContent = m.message; return; }
+    if (m.action === 'studio-settings' || m.action === 'settings-saved' || m.action === 'settings-save') { receiveSettings(m); return; }
+    if (m.action === 'handpick' || m.action === 'handpickSaved') { receiveHandpick(m); return; }
+    if (m.action === 'customSaved') { receiveCustomSaved(m); return; }
+    if (m.action === 'fiio-login-result') { receiveFiioLogin(m); return; }
+    if (m.action === 'fiio-status' || m.action === 'fiio-presets') {
+        updateFiioAccount(m);
+        return;
+    }
+    if (!m.connected && m.action !== 'connect') {
+        if (m.ok === false && ['preset','apply-eq','save-eq','setting','usb-mode'].includes(m.action)) {
+            resetDeviceDisplay();
+            $('#connect').disabled = false;
+        }
+        if (m.message) toast(m.message);
+        return;
+    }
+    reading = false;
+    $('.workspace').inert = false;
+    $('#connect').disabled = !!(m.ok && m.connected);
+    $('#read').disabled = false;
+    if (!m.ok) {
+        resetDeviceDisplay();
+        $('#status').textContent = 'Chưa đọc được JA11';
+        $('#deviceSub').textContent = m.message;
+        $('#dirty').textContent = 'Bản nháp trên máy · chưa đồng bộ';
+        toast(m.message);
+        return;
+    }
+    deviceState = m.state;
+    const name = ['Vocal','Classic','Bass','User 1','Off'][deviceState.preset];
+    savedUser1 = {masterGain:deviceState.masterGain, bands:deviceState.bands};
+    loadSnapshot(name === 'User 1' ? savedUser1 : factory[name]);
+    setActive(name);
+    setDeviceControls(true);
+    $('#presetChip').textContent = 'Preset ' + (name === 'User 1' ? 'Custom' : name);
+    $('#fw').textContent = 'Firmware ' + deviceState.firmware;
+    $('#uac').value = deviceState.uac === 0 ? '1.0' : '2.0';
+    $('#uacChip').textContent = 'USB Audio ' + $('#uac').value;
+    window.syncUacMenu?.();
+    $('#mic').classList.toggle('on', deviceState.mic === 1);
+    const rates = ['32','44.1','48','88.2','96','176.4','192','352.8','384','705.6','768'];
+    const rate = rates[deviceState.sampleRate];
+    const label = rate ? rate + ' kHz' : ['DSD64','DSD128','DSD256','DSD512'][deviceState.sampleRate - 11];
+    $('#rateChip').textContent = 'Sample rate ' + (label || '—');
+    $('#dirty').textContent = name === 'User 1' ? 'Custom · 5 band đã đọc từ DAC' : 'Đồ thị tham khảo · ' + name;
+    $('#deviceSub').textContent = 'Preset hiện tại: ' + (name === 'User 1' ? 'Custom' : name) + ' · Đã đọc đủ 5 band của Custom';
+    $('#status').textContent = 'Đã đồng bộ';
+    $('#statusDot').classList.add('on');
+    if ($('.eqnav [data-view="about"].active')) showAbout();
+};
+resetDeviceDisplay();
+function syncEqEditability(){
+ const locked=['Vocal','Classic','Bass','Off'].includes(active);
+ $('.workspace').classList.toggle('factory-locked',locked);
+ document.querySelectorAll('#global,#globalNum,#bands input,#bands .filterbuttons button,#flat,#undo').forEach(el=>el.disabled=locked);
+ $('#apply').disabled=locked||!deviceState.firmware;
+ $('#save').disabled=locked||!deviceState.firmware;
+ document.querySelectorAll('#handles .handle').forEach(el=>el.setAttribute('tabindex',locked?'-1':'0'));
+}
+function setActive(name){document.querySelectorAll('.presetbtn[data-preset]').forEach(b=>b.classList.toggle('active',b.dataset.preset===name));active=name;syncEqEditability()}
+const factory={Vocal:{masterGain:0,bands:[{type:'LSC',freq:120,gain:-1,q:.71},{type:'PK',freq:350,gain:-1,q:1},{type:'PK',freq:1800,gain:1.5,q:1},{type:'PK',freq:3500,gain:2,q:1},{type:'HSC',freq:9000,gain:1,q:.71}]},Classic:{masterGain:0,bands:[{type:'LSC',freq:100,gain:0,q:.71},{type:'PK',freq:300,gain:0,q:1},{type:'PK',freq:1000,gain:0,q:1},{type:'PK',freq:3000,gain:0,q:1},{type:'HSC',freq:10000,gain:0,q:.71}]},Bass:{masterGain:0,bands:[{type:'LSC',freq:100,gain:4,q:.71},{type:'PK',freq:250,gain:2,q:1},{type:'PK',freq:800,gain:0,q:1},{type:'PK',freq:3000,gain:-1,q:1},{type:'HSC',freq:9000,gain:0,q:.71}]},Off:{masterGain:0,bands:[{type:'PK',freq:80,gain:0,q:.7},{type:'PK',freq:250,gain:0,q:1},{type:'PK',freq:1000,gain:0,q:1},{type:'PK',freq:3000,gain:0,q:1},{type:'PK',freq:10000,gain:0,q:1}]}};
+document.querySelectorAll('.presetbtn[data-preset]').forEach(btn=>btn.onclick=()=>{const name=btn.dataset.preset;setActive(name);if(name==='User 1'){if(savedUser1)loadSnapshot(savedUser1)}else loadSnapshot(factory[name]);$('#presetChip').textContent=`Preset ${name === 'User 1' ? 'Custom' : name}`;send('preset',name==='User 1'?'Tùy chỉnh':name==='Off'?'EQ tắt':name);$('#dirty').textContent=name==='User 1'?'Custom':`Bản xem trước preset ${name}`});
+$('#global').oninput = e => { model.masterGain = e.target.valueAsNumber; draw(); };
+$('#globalNum').oninput = e => {
+    const value = e.target.valueAsNumber;
+    if (!Number.isFinite(value)) return;
+    model.masterGain = Math.round(Math.max(-12, Math.min(12, value)) * 10) / 10;
+    draw();
+};
+$('#globalNum').onblur = e => { e.target.value = model.masterGain.toFixed(1); };
+$('#apply').onclick=()=>{if(!['Vocal','Classic','Bass','Off'].includes(active))send('apply-eq',model)};$('#save').onclick=()=>{if(['Vocal','Classic','Bass','Off'].includes(active))return;if(active!=='User 1'&&!confirm('Lưu đè Custom bằng cấu hình này?'))return;send('save-eq',model);savedUser1=JSON.parse(JSON.stringify(model));setActive('User 1');$('#dirty').textContent='Đã lưu User 1'};
+$('#flat').onclick=()=>{checkpoint();model={masterGain:0,bands:[{type:'PK',freq:80,gain:0,q:.7},{type:'PK',freq:250,gain:0,q:1},{type:'PK',freq:1000,gain:0,q:1},{type:'PK',freq:3000,gain:0,q:1},{type:'PK',freq:10000,gain:0,q:1}]};setActive('User 1');draw()};$('#undo').onclick=()=>{let v=history.pop();if(v)loadSnapshot(JSON.parse(v))};
+$('#mic').onclick=()=>{const enabled=!$('#mic').classList.contains('on');$('#mic').classList.toggle('on',enabled);send('setting',{name:'mic',enabled})};$('#uac').onchange=e=>send('usb-mode',e.target.value);
+$('#plot').addEventListener('pointerdown',e=>{if(e.target.classList.contains('handle')){dragIndex=+e.target.dataset.index;$('#plot').setPointerCapture(e.pointerId)}});$('#plot').addEventListener('pointermove',e=>{if(dragIndex<0)return;const r=$('#plot').getBoundingClientRect(),x=(e.clientX-r.left)/r.width*900,y=(e.clientY-r.top)/r.height*360,b=model.bands[dragIndex];b.freq=Math.round(20*10**((Math.max(100,Math.min(870,x))-100)/770*3));b.gain=Math.round(10*Math.max(-12,Math.min(12,12-(Math.max(30,Math.min(330,y))-30)/12.5-response(b.freq)+b.gain)))/10;draw()});$('#plot').addEventListener('pointerup',()=>dragIndex=-1);
+$('#export').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(model,null,2)],{type:'application/json'}));a.download='ja11-user1.json';a.click();URL.revokeObjectURL(a.href)};$('#importBtn').onclick=()=>$('#file').click();$('#file').onchange=async e=>{try{checkpoint();loadSnapshot(JSON.parse(await e.target.files[0].text()));setActive('User 1')}catch(err){toast(err.message)}};
+$('#saveLocal').onclick=()=>{$('#modal').classList.add('show');$('#presetName').focus()};$('#cancelModal').onclick=()=>$('#modal').classList.remove('show');$('#confirmModal').onclick=()=>{const name=$('#presetName').value.trim();if(!name)return;let list=JSON.parse(localStorage.getItem('ja11-local-presets')||'[]');list.push({name,...JSON.parse(JSON.stringify(model))});persistLocalPresets(JSON.stringify(list));$('#modal').classList.remove('show');$('#presetName').value='';renderLocal();if (!$('#subpage').hidden && $('#subpage [data-mode="mine"].active')) showPersonal(true)};function renderLocal(){const r=$('#localPresets');r.replaceChildren();for(const p of JSON.parse(localStorage.getItem('ja11-local-presets')||'[]')){const b=document.createElement('button');b.className='presetbtn';b.setAttribute('translate','no');b.textContent=p.name;b.onclick=()=>{loadSnapshot(p);setActive('User 1')};r.append(b)}}
+function sizePlotHandles(){
+ const rect=$('#plot').getBoundingClientRect();
+ if(!rect.width||!rect.height)return;
+ document.querySelectorAll('#handles .handle,#handles .handletext').forEach(el=>
+ el.setAttribute('transform',`translate(${el.dataset.x} ${el.dataset.y}) scale(${900/rect.width} ${360/rect.height})`));
+}
+new ResizeObserver(sizePlotHandles).observe($('#plot'));
+drawGrid();draw();renderLocal();
+</script><script>
+(()=>{let before=null,redoStack=[];function begin(){if(before===null)before=JSON.stringify(model)}function end(){if(before!==null){if(before!==JSON.stringify(model)){history.push(before);redoStack=[]}before=null}}const bandRoot = $('#bands');
+for (const name of ['pointerdown','keydown','beforeinput']) {
+    bandRoot.addEventListener(name, event => { if (event.target.matches('input')) begin(); });
+}
+for (const name of ['change','pointerup','focusout']) bandRoot.addEventListener(name, end);
+$('#global').addEventListener('pointerdown',begin);$('#global').addEventListener('pointerup',end);$('#globalNum').addEventListener('focus',begin);$('#globalNum').addEventListener('change',end);$('#plot').addEventListener('pointerdown',e=>{if(e.target.classList.contains('handle'))begin()});$('#plot').addEventListener('pointerup',end);$('#undo').onclick=()=>{const prev=history.pop();if(prev){redoStack.push(JSON.stringify(model));loadSnapshot(JSON.parse(prev));$('#dirty').textContent='Đã hoàn tác'}};const redo=document.createElement('button');redo.className='button ghost';redo.textContent='Làm lại';redo.onclick=()=>{const next=redoStack.pop();if(next){history.push(JSON.stringify(model));loadSnapshot(JSON.parse(next));$('#dirty').textContent='Đã làm lại'}};$('#redo').replaceWith(redo);redo.id='redo';const ab=document.createElement('button');ab.className='button';ab.textContent='A/B';ab.onclick=()=>{if(!savedUser1){toast('Kết nối JA11 và đọc Custom trước');return}if(active==='A / Custom đã lưu'){checkpoint();loadSnapshot(JSON.parse(ab.dataset.draft));setActive('User 1');ab.dataset.draft='';ab.textContent='A/B'}else{ab.dataset.draft=JSON.stringify(model);loadSnapshot(savedUser1);setActive('A / Custom đã lưu');ab.textContent='Trở lại bản chỉnh';send('apply-eq',savedUser1)}};$('#apply').before(ab);const originalFile=$('#file').onchange;$('#file').accept='application/json,.txt,text/plain';$('#file').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{checkpoint();if(f.name.toLowerCase().endsWith('.json'))loadSnapshot(JSON.parse(await f.text()));else{const text=await f.text(),bands=[];let pre=0;for(const line of text.split(/\r?\n/)){const pm=line.match(/^\s*Preamp:\s*([-+\d.]+)\s*dB/i);if(pm)pre=+pm[1];const m=line.match(/Filter\s+\d+\s*:\s*(?:ON\s+)?(PK|LS|LSC|HS|HSC)\s+Fc\s+([\d.]+)(?:\s*Hz)?\s+Gain\s+([-+\d.]+)\s*dB\s+Q\s+([\d.]+)/i);if(m)bands.push({type:m[1]==='LS'||m[1]==='LSC'?'LSC':m[1]==='HS'||m[1]==='HSC'?'HSC':'PK',freq:+m[2],gain:+m[3],q:+m[4]})}if(!bands.length)throw Error('Không tìm thấy filter trong file Equalizer APO');while(bands.length<5)bands.push({type:'PK',freq:[100,500,1000,3000,10000][bands.length],gain:0,q:1});loadSnapshot({masterGain:pre,bands:bands.slice(0,5)})}setActive('User 1');$('#dirty').textContent='Preset đã nhập · chưa lưu vào DAC'}catch(err){toast(err.message)}finally{e.target.value=''}};const saveLocal=renderLocal;window.renderLocal=function(){saveLocal();document.querySelectorAll('#localPresets .presetbtn').forEach((b,i)=>{const del=document.createElement('span');del.textContent='×';del.style.cssText='color:#ff8391;padding-left:8px;font-size:15px';del.title='Xóa preset';del.onclick=e=>{e.stopPropagation();const list=JSON.parse(localStorage.getItem('ja11-local-presets')||'[]');list.splice(i,1);persistLocalPresets(JSON.stringify(list));window.renderLocal()};b.append(del)})};window.renderLocal()})();
+</script><script src="studio-settings.js"></script><script src="window-chrome.js"></script><script src="studio-pages.js"></script><script src="fiio-library.js"></script></body></html>
